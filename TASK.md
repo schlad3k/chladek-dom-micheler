@@ -1,5 +1,5 @@
 # Middleware Engineering "Document Oriented Middleware using MongoDB" - Taskdescription
-Join GIT repository: 
+GIT repository: [https://github.com/ThomasMicheler/DEZSYS_GK_WAREHOUSE_DOM.git](https://github.com/ThomasMicheler/DEZSYS_GK_WAREHOUSE_DOM.git)
 
 ## Einführung
 
@@ -89,6 +89,7 @@ Die Daten werden in der Zentrale in einem MongoDB Repository gespeichert und kö
 * [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
 * [MongoDB Installation](https://docs.mongodb.com/manual/administration/install-community/)
 * [mongo Shell Quick Reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
+* [mongo Shell Query Reference](https://www.mongodb.com/docs/manual/tutorial/query-embedded-documents/)
 * [Grundlagen Spring Framework](https://spring.io/)
 * [Spring Boot](https://spring.io/guides/gs/spring-boot/)
 * [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)
@@ -112,37 +113,37 @@ Den Demo-Abfragen liegt folgende Datenstruktur zu Grunde:
    `    warehousePostalCode: 4010,`    
    `   warehouseCity: 'Linz',`   
    `   warehouseCountrz: 'Austria',`   
-   `   competitionData: [`  
+   `   productData: [`  
    `      { productID: '00-443175', productName: 'Bio Orangensaft Sonne', productQuantity: 2500 },`    
    `      { productID: '00-871895', productName: 'Bio Apfelsaft Gold', productQuantity: 3420 },`    
    `      { productID: '01-926885', productName: 'Ariel Waschmittel Color', productQuantity: 478 },`     
    `   ]`   
     `}`
   
-* Filtern nach dem Lagerstandort 1  
+* Filtern nach dem Lagerstandort 1    
 `db.demo.find( { 
 	"warehouseID": "1"
 } )`
 
 
-* Filtern nach Lagerstandort 1 und dem Produkt mit dem Namen "Bio Apfelsaft Gold"
+* Filtern nach Lagerstandort 1 und dem Produkt mit dem Namen "Bio Apfelsaft Gold"  
 `db.demo.find( { 
 	"warehouseID": "1",
-        "productName": "Bio Apfelsaft Gold",
+        "productName": "Bio Apfelsaft Gold"
 } )`
 
-* Filtern nach allen Produkten, die einen Lagerbestand unter 500 Stueck haben
+* Filtern nach allen Produkten, die einen Lagerbestand unter 500 Stueck haben.  
 `db.demo.find( { 
 	"productQuantity": { $lte: 500 }
 } )`
 
-* Filtern nach Lagerstandort 1 und einem Lagerbestand unter 500 Stueck haben
+* Filtern nach Lagerstandort 1 und einem Lagerbestand unter 500 Stueck haben.  
 `db.demo.find( { 
     "warehouseID": "1",
     "productQuantity": { $lte: 500 }
 } )`
 
-* Filtern nach allen Produkten der Produktkategorien
+* Filtern nach allen Produkten der Produktkategorien.  
 `db.demo.find( { 
      productCategory: { $in: [ "Waschmittel", "Getraenk" ] } 
 } )`
