@@ -41,7 +41,7 @@ public class Application implements CommandLineRunner {
 		System.out.println();
 
 		// Fetch single product
-		System.out.println("Record(s) found with ProductID(\"1\"):");
+		System.out.println("Record(s) found with ProductID(\"00-871895\"):");
 		System.out.println("--------------------------------");
 		System.out.println(repository.findByProductID("00-871895"));
 		System.out.println();
