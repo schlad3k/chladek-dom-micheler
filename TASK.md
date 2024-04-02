@@ -122,33 +122,30 @@ Den Demo-Abfragen liegt folgende Datenstruktur zu Grunde:
     `}`
   
 * Filtern nach dem Lagerstandort 1    
-`db.demo.find( { 
+`db.productData.find( { 
 	"warehouseID": "1"
 } )`
 
 
 * Filtern nach Lagerstandort 1 und dem Produkt mit dem Namen "Bio Apfelsaft Gold"  
-`db.demo.find( { 
+`db.productData.find( { 
 	"warehouseID": "1",
         "productName": "Bio Apfelsaft Gold"
 } )`
 
 * Filtern nach allen Produkten, die einen Lagerbestand unter 500 Stueck haben.  
-`db.demo.find( { 
+`db.productData.find( { 
 	"productQuantity": { $lte: 500 }
 } )`
 
 * Filtern nach Lagerstandort 1 und einem Lagerbestand unter 500 Stueck haben.  
-`db.demo.find( { 
+`db.productData.find( { 
     "warehouseID": "1",
     "productQuantity": { $lte: 500 }
 } )`
 
 * Filtern nach allen Produkten der Produktkategorien.  
-`db.demo.find( { 
+`db.productData.find( { 
      productCategory: { $in: [ "Waschmittel", "Getraenk" ] } 
 } )`
-
-
-
 
