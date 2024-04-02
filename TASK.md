@@ -67,6 +67,7 @@ Die Daten werden in der Zentrale in einem MongoDB Repository gespeichert und kö
     * Installation und Konfiguration einer dokumentenorientierten Middleware mit Hilfe von Spring Data MongoDB
     * Entwurf und Umsetzung einer entsprechenden JSON Datenstruktur
     * Speicherung der Daten in einem MongoDB Repository in der Zentrale
+        - mindestens 30 Produkte in 5 Produktkategorien
     * Speicherung der Daten von nur einem Lagerstandort
     * Beantwortung der Fragestellungen   
 *   Anforderungen **"zur Gänze erfüllt"**
