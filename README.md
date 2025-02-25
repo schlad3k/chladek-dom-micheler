@@ -53,21 +53,20 @@ Die Daten werden in der Zentrale in einem MongoDB Repository gespeichert und kö
   `docker exec -it mongo bash`  
   `mongosh`  
 
-* Execute MongoShell Commands  
-	`show dbs`  
-	`use local`  
-	`db.startup_log.count();`  
+* Execute MongoShell Commands
+  `show dbs`
+  `use local`
+  `db.startup_log.count();`  
 
 * Accessing Data with MongoDB and Spring  
   - Build and Run Exmample  
 	  `gradle clean bootRun`  
 
-  - Check Data in MongoDB  
-		`docker exec -it mongo bash`  
-		`mongosh`  
-		`use test`  
-		`db.warehouseData.find()`  
-	  	``
+  - Check Data in MongoDB
+    `docker exec -it mongo bash`
+    `mongosh`
+    `use test`
+    `db.warehouseData.find()`  
 
 ## 1.5 Bewertung  
 
