@@ -1,111 +1,163 @@
-# DEZSYS_GK81_WAREHOUSE_ORM
+# Middleware Engineering "Document Oriented Middleware using MongoDB" - Taskdescription
+GIT repository: [https://github.com/ThomasMicheler/DEZSYS_GK_WAREHOUSE_DOM.git](https://github.com/ThomasMicheler/DEZSYS_GK_WAREHOUSE_DOM.git)
 
-Join GitHub Repo: https://github.com/ThomasMicheler/DEZSYS_GK862_DATAWAREHOUSE_ORM.git
+## Einführung
 
-This lesson introduces the data accessing model in Spring and the basics of Object Relational Mapping (ORM).
+Diese Übung soll helfen die Funktionsweise und Einsatzmöglichkeiten eines dokumentenorientierten dezentralen Systems mit Hilfe des Frameworks Spring Data MongoDB oder einem Framework Ihrer Wahl zu demonstrieren. Die Daten werden in dieser Übung in einem NoSQL Repository gespeichert und verarbeitet.
 
-## Introduction
+Es handelt sich um ein Lagerstandort Beispiel, wie in Aufgabe "GK8.1 Spring Data and ORM". Die Daten aller Lagerstandorte sollen in der Zentrale persistiert und in einer NoSQL Datenbank gespeichert werden. Von hier aus koennen die Daten fuer verschiedene Fragestellungen des Betriebes (Management, Einkauf, Vertrieb,...) abgefragt werden.
 
-This exercise is intended to demonstrate the interaction between a programming language (Java) and a persistance layer (MySQL, PostgreSQL).
+## 1.1 Ziele
 
-First you should follow the Spring tutorial ["Accessing data with MySQL"](https://spring.io/guides/gs/accessing-data-mysql) and document all important steps in your protocol. Don't forget to make notes about all problems occured during the setup. Afterwards you should extend the data model of the example and adapt it for a Data Warehouse application (data structure see below). One relation between the entities Datawarehouse and Products is required in this example. Please read the documentation how you implementation entity relations using the ORM model.
+Das Ziel dieser Übung ist die Implementierung einer dokumentenorientierten Middleware, die die Daten aller Warenlager zentral in einem entsprechenden Format ablegt.
 
-Document all individual implementation steps and any problems that arise in a log (Markdown).  
-Create a GITHUB repository for this project and add the link to it in the comments.
+## 1.2 Voraussetzungen
 
-## Requirements
-
-*   MySQL DMS
-     *  Local MySQL Service   
-     *  MySQL Docker Container
-*   Gradle 8 or higher  
-*   Java SDK 18 or higher  
-     
-## Data Structure - Data Warehouse
-```
-<warehouseData>
-    <warehouseID>001</warehouseID>
-    <warehouseName>Linz Bahnhof</warehouseName>
-    <warehouseAddress>Bahnhofsstrasse 27/9</warehouseAddress>
-    <warehousePostalCode>Linz</warehousePostalCode>
-    <warehouseCity>Linz</warehouseCity>
-    <warehouseCountry>Austria</warehouseCountry>
-    <timestamp>2021-09-12 08:52:39.077</timestamp>
-    <productData>
-         <product>
-             <productID>00-443175</productID>
-             <productName>Bio Orangensaft Sonne</productName>
-             <productCategory>Getraenk</productCategory>
-             <productQuantity>2500</productQuantity>
-             <productUnit>Packung 1L</productUnit>
-         </product>
-         <product>
-             <productID>00-871895</productID>
-             <productName>Bio Apfelsaft Gold</productName>
-             <productCategory>Getraenk</productCategory>
-             <productQuantity>3420</productQuantity>
-             <productUnit>Packung 1L</productUnit>
-         </product>
-    </productData>
-</warehouseData>
-```
-## Important Commands. 
-
-*   Use gradle to build the application  
-     `gradle clean`   
-     `gradle bootRun`   
-
-*   Connect to MySQL Shell  
-     `mysqlsh <username>@localhost`   
-
-*   MySQL Shell Commands  
-     `show databases; // list all local databases `   
-     `use example;  // switch to a local database "example" `   
-     `show tables;           // list all of current database   `   
-     `create table example;   // create a SQL table with the name "example"   ` 
-
-## Assessment
-
-- Group size: 1 Person.  
-- Result by protocol and delivery meeting (in English). 
-- Requirements **überwiegend erfüllt**. 
-    * Answer the questions below about the ORM framework.  
-    * Use the tutorial ["Accessing data with MySQL"](https://spring.io/guides/gs/accessing-data-mysql) 
-    * Implement the MySQL example with the User database 
-    * Document each single development step in your protocol and describe the most important code snippets in few sentences. Furthermore, the output of the application and any problems that occur should be documented in submission document.
-*  Requirements **zur Gänze erfüllt**
-   * Customize the data model for the Data Warehouse application (min. 2 entities with 1 relation).  
-   * Insert following records: 2 Data Warehouse records, 10 Product records.  
-   * Document which parts of the program need to be adapted
-*  Extended Requirements **überwiegend erfüllt**
-   *   Find out which methods are available for the CrudRepository to collect data   
-        https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html.    
-   *  Extend the Data Warehouse repository with following functionalities:   
-       * Collect all data of one data warehouse specified by datawarehouseID.  
-       * Collect a single product of a data warehouse specified by datawarehouseID and productID.  
-       * Update a data warehouse using datawarehouseID. 
-   * Document the parts of your project which have to be extend
-*  Extended Requirements **zur Gänze erfüllt**.  
-   *  Replace the MySQL database management system with a PostgreSQL database management system.  
-   *  Document which configuration files need to be adapted
+* Grundlagen zu JSON & REST
+* Grundlagen Architektur von verteilten Systemen
+* Grundlagen Spring Framework, Spring Boot oae.
+* Grundlagen NoSQL
+* Installation MongoDB
+* Datenstruktur basierend auf der Aufgabenstellung "GK8.1 Spring Data and ORM"
+* Umsetzung eines einfachen Web-Userinterfaces zur Anzeige von Daten
 
 
-## Questions
+## 1.3 Aufgabenstellung
 
-* What is ORM and how is JPA used?  
-* What is the application.properties used for and where must it be stored?  
-* Which annotations are frequently used for entity types? Which key points must be observed?   
-* What methods do you need for CRUD operations?  
+Implementieren Sie eine dokumentenorientierte Middleware mit Hilfe von MongoDB, dass Daten über eine REST Schnittstellen empfängt und die Daten des Lagerstandortes in einer MongoDB Datenbank im JSON Format abspeichert. Entwerfen Sie eine geeignet Datenstruktur, um eine kontinuierliche Speicherung der Daten zu gewährleisten.
 
-## Links & Further Resources
+Es sollen dabei folgende REST-Funktionen implementiert werden:
+* POST /warehouse: fügt einen neuen Lagerstandort hinzu
+* GET /warehouse: abrufen aller Lagerstandorte und deren Lagerbestand
+* GET /warehouse/{id}: abrufen eines Lagerstandortes id und dessen Lagerbestand
+* DELETE /warehouse/{id}: löschen eines Lagerstandortes id 
 
-* Object Relational Mapping (ORM) Data Access:   
-   https://docs.spring.io/spring-framework/reference/data-access/orm.html
-* Accessing data with MySQL.  
-   https://spring.io/guides/gs/accessing-data-mysql
-* Difference between Hibernate and Spring Data:  
-   https://dzone.com/articles/what-is-the-difference-between-hibernate-and-sprin-1
-* Introduction Hibernate:   
-   https://vicksheet.medium.com/getting-started-with-hibernate-an-introduction-to-the-orm-framework-for-java-applications-fd97af01b7a6
-* Video:   
-   https://www.youtube.com/watch?v=NC-1j1grMPI&ab_channel=ManningPublications
+* POST /product: fügt ein neues Produkt und dessen Lagerbestand zu einem Lagerstandort hinzu
+* GET /product: abrufen aller Produkte/Lagerbestand und deren Lagerstandort
+* GET /product/{id}: abrufen eines Produktes id und dessen Lagerstandorte
+* DELETE /product/{id}: löschen eines Produktes id auf einem Lagerstandort
+
+Das Format und in welchen Zeitabständen die Daten eintreffen wird von Ihnen, als System Architekt, spezifiziert und implementiert.
+
+Die Daten werden in der Zentrale in einem MongoDB Repository gespeichert und können hier zu Kontrollzwecken abgerufen werden (mongo Shell).
+
+## 1.4 Demo Applikation
+
+* Download Docker for MongoDB  
+  `docker pull mongo`  
+
+* Run Docker for MongoDB (using port 27017, name mongo)  
+  `docker run -d -p 27017:27017 --name mongo mongo`  
+
+* Run MongoShell on Docker Instance  
+  `docker exec -it mongo bash`  
+  `mongosh`  
+
+* Execute MongoShell Commands  
+	`show dbs`  
+	`use local`  
+	`db.startup_log.count();`  
+
+* Accessing Data with MongoDB and Spring  
+  - Build and Run Exmample  
+	  `gradle clean bootRun`  
+
+  - Check Data in MongoDB  
+		`docker exec -it mongo bash`  
+		`mongosh`  
+		`use test`  
+		`db.warehouseData.find()`  
+	  	``
+
+## 1.5 Bewertung  
+
+*   Gruppengrösse: 1 Person
+*   Abgabemodus: per Protokoll und Abgabespraech
+*   Grundlagen Anforderungen **"überwiegend erfüllt"**
+    * Installation und Konfiguration einer dokumentenorientierten Middleware mit einem Framework Ihrer Wahl und MongoDB
+    * Entwurf und Umsetzung einer entsprechenden JSON Datenstruktur
+    * Speicherung der Daten in einem MongoDB Repository in der Zentrale
+        - mindestens 10 Produkte in 3 Produktkategorien
+    * Speicherung der Daten von nur einem Lagerstandort
+    * Beantwortung der Fragestellungen   
+*   Grundlagen Anforderungen **"zur Gänze erfüllt"**
+    * Formulierung 3 sinnvollen Fragestellung für einen Anwendungsfall in der Zentrale und deren Abfragen in einer Mongo Shell
+    * Speicherung der Daten von mehreren Lagerstandorten
+*   Erweiterte Anforderungen **"überwiegend erfüllt"**
+    * Implementieren Sie eine kleine Applikation, dass die Daten generiert und über das REST-Interfaces dieser Übung abspeichert. Dabei werden sowohl Produkte, als auch Lagerstandorte abgelegt.
+*   Erweiterte Anforderungen **"zur Gänze erfüllt"**
+
+
+## 1.6 Fragestellung für Protokoll
+
++ Nennen Sie 4 Vorteile eines NoSQL Repository im Gegensatz zu einem relationalen DBMS
++ Nennen Sie 4 Nachteile eines NoSQL Repository im Gegensatz zu einem relationalen DBMS
++ Welche Schwierigkeiten ergeben sich bei der Zusammenführung der Daten?
++ Welche Arten von NoSQL Datenbanken gibt es?
++ Nennen Sie einen Vertreter für jede Art?
++ Beschreiben Sie die Abkürzungen CA, CP und AP in Bezug auf das CAP Theorem
++ Mit welchem Befehl koennen Sie den Lagerstand eines Produktes aller Lagerstandorte anzeigen.
++ Mit welchem Befehl koennen Sie den Lagerstand eines Produktes eines bestimmten Lagerstandortes anzeigen.
+
+## 1.7 Links und Dokumente
+* [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
+* [MongoDB Installation](https://docs.mongodb.com/manual/administration/install-community/)
+* [mongo Shell Quick Reference](https://docs.mongodb.com/manual/reference/mongo-shell/)
+* [mongo Shell Query Reference](https://www.mongodb.com/docs/manual/tutorial/query-embedded-documents/)
+* [Grundlagen Spring Framework](https://spring.io/)
+* [Spring Boot](https://spring.io/guides/gs/spring-boot/)
+* [Spring Data MongoDB](https://spring.io/projects/spring-data-mongodb)
+* [Spring RESTful Web Service](https://spring.io/guides/gs/rest-service/#use-maven)
+* NoSQL Introduction
+  - [NoSQL on w3resource](https://www.w3resource.com/mongodb/nosql.php)  
+  - [Introduction to NoSQL Database](https://www.edureka.co/blog/introduction-to-nosql-database/)  
+  - [NoSQL im Überblick](https://www.heise.de/ct/artikel/NoSQL-im-Ueberblick-1012483.html)  
+  - [Introduction to NoSQL Databases on YouTube ](https://www.youtube.com/watch?v=2yQ9TGFpDuM)  
+
+
+## 1.8 Mongo Shell Abfragen  
+  
+Link to [Mongo Shell Query and Projection Operators](https://docs.mongodb.com/manual/reference/operator/query/)
+
+Den Demo-Abfragen liegt folgende Datenstruktur zu Grunde:   
+   `{  `  
+   `    warehouseID: '1',   `   
+   `    warehouseName: 'Linz Bahnhof',   `   
+   `   timestamp: '2022-01-02 01:00:00',   `   
+   `    warehousePostalCode: 4010,`    
+   `   warehouseCity: 'Linz',`   
+   `   warehouseCountrz: 'Austria',`   
+   `   productData: [`  
+   `      { productID: '00-443175', productName: 'Bio Orangensaft Sonne', productQuantity: 2500 },`    
+   `      { productID: '00-871895', productName: 'Bio Apfelsaft Gold', productQuantity: 3420 },`    
+   `      { productID: '01-926885', productName: 'Ariel Waschmittel Color', productQuantity: 478 },`     
+   `   ]`   
+    `}`
+  
+* Filtern nach dem Lagerstandort 1    
+`db.productData.find( { 
+	"warehouseID": "1"
+} )`
+
+
+* Filtern nach Lagerstandort 1 und dem Produkt mit dem Namen "Bio Apfelsaft Gold"  
+`db.productData.find( { 
+	"warehouseID": "1",
+        "productName": "Bio Apfelsaft Gold"
+} )`
+
+* Filtern nach allen Produkten, die einen Lagerbestand unter 500 Stueck haben.  
+`db.productData.find( { 
+	"productQuantity": { $lte: 500 }
+} )`
+
+* Filtern nach Lagerstandort 1 und einem Lagerbestand unter 500 Stueck haben.  
+`db.productData.find( { 
+    "warehouseID": "1",
+    "productQuantity": { $lte: 500 }
+} )`
+
+* Filtern nach allen Produkten der Produktkategorien.  
+`db.productData.find( { 
+     productCategory: { $in: [ "Waschmittel", "Getraenk" ] } 
+} )`
