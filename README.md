@@ -26,12 +26,12 @@ Das Ziel dieser Übung ist die Implementierung einer dokumentenorientierten Midd
 
 Implementieren Sie eine dokumentenorientierte Middleware mit Hilfe von MongoDB, dass Daten über eine REST Schnittstellen empfängt und die Daten des Lagerstandortes in einer MongoDB Datenbank im JSON Format abspeichert. Entwerfen Sie eine geeignet Datenstruktur, um eine kontinuierliche Speicherung der Daten zu gewährleisten.
 
-Es sollen dabei folgende REST-Funktionen implementiert werden:
-* POST /warehouse: fügt einen neuen Lagerstandort hinzu
-* GET /warehouse: abrufen aller Lagerstandorte und deren Lagerbestand
-* GET /warehouse/{id}: abrufen eines Lagerstandortes id und dessen Lagerbestand
-* DELETE /warehouse/{id}: löschen eines Lagerstandortes id 
+Es sollen dabei folgende REST-Funktionen implementiert werden:   
 
+* POST /warehouse: fügt einen neuen Lagerstandort hinzu  
+* GET /warehouse: abrufen aller Lagerstandorte und deren Lagerbestand  
+* GET /warehouse/{id}: abrufen eines Lagerstandortes id und dessen Lagerbestand  
+* DELETE /warehouse/{id}: löschen eines Lagerstandortes id   
 * POST /product: fügt ein neues Produkt und dessen Lagerbestand zu einem Lagerstandort hinzu
 * GET /product: abrufen aller Produkte/Lagerbestand und deren Lagerstandort
 * GET /product/{id}: abrufen eines Produktes id und dessen Lagerstandorte
