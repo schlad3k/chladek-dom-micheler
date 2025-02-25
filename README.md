@@ -76,17 +76,26 @@ Die Daten werden in der Zentrale in einem MongoDB Repository gespeichert und kö
 *   Grundlagen Anforderungen **"überwiegend erfüllt"**
     * Installation und Konfiguration einer dokumentenorientierten Middleware mit einem Framework Ihrer Wahl und MongoDB
     * Entwurf und Umsetzung einer entsprechenden JSON Datenstruktur
-    * Speicherung der Daten in einem MongoDB Repository in der Zentrale
-        - mindestens 10 Produkte in 3 Produktkategorien
     * Speicherung der Daten von nur einem Lagerstandort
+    * Speicherung der Daten in einer MongoDB Datenbank in der Zentrale
+        - mindestens 10 Produkte in 3 Produktkategorien
+    * REST API:
+        - POST /product, GET /product, GET /warehouse
     * Beantwortung der Fragestellungen   
 *   Grundlagen Anforderungen **"zur Gänze erfüllt"**
-    * Formulierung 3 sinnvollen Fragestellung für einen Anwendungsfall in der Zentrale und deren Abfragen in einer Mongo Shell
-    * Speicherung der Daten von mehreren Lagerstandorten
+    * 5 CRUD Operationen über Mongo Shell
+      Dokumentieren Sie den Mongo Shell Befehl und dessen Ergebnis.
+      Beispiel: ein Produkt hinzufügen, ein Produkt löschen, ein Produkt ändern, ...
 *   Erweiterte Anforderungen **"überwiegend erfüllt"**
-    * Implementieren Sie eine kleine Applikation, dass die Daten generiert und über das REST-Interfaces dieser Übung abspeichert. Dabei werden sowohl Produkte, als auch Lagerstandorte abgelegt.
+    * Erweiterung der Datenstruktur, sodass ein Speicherung der Daten von mehreren Lagerstandorten möglich ist.
+    * REST API: Implementierung der gesamten Schnittstelle, wie in der Angabe beschrieben
+    * Implementieren Sie eine kleine Applikation, dass die Daten generiert und über das REST-Interfaces dieser Übung abspeichert.
+      Dabei werden sowohl Produkte, als auch Lagerstandorte abgelegt.
 *   Erweiterte Anforderungen **"zur Gänze erfüllt"**
-
+    * Formulierung 3 sinnvollen Fragestellung für einen Anwendungsfall in der Zentrale und deren Abfragen in einer Mongo Shell.
+      Beispiel:
+      Wie ist der Lagerbestand von einem Produkt X über alle Lagerstandorte?
+      Welche Produkte haben einen Lagerbestand von unter 10 Stück über alle Lagerstandorte?
 
 ## 1.6 Fragestellung für Protokoll
 
