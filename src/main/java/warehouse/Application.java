@@ -4,63 +4,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import warehouse.model.ProductData;
+import warehouse.model.Warehouse;
+import warehouse.repository.ProductRepository;
+import warehouse.repository.WarehouseRepository;
 import warehouse.repository.WarehouseRepository;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
 	@Autowired
-	private WarehouseRepository repository;
+	private WarehouseRepository warehouseRepository;
+	@Autowired
+	private ProductRepository productRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
+		warehouseRepository.deleteAll();
 
-		// Initialize product data repository
-		repository.deleteAll();
+		Warehouse warehouse1 = new Warehouse("67e426623b15a06514fee5e6", "Lager Berlin", "Berlin");
+		Warehouse warehouse2 = new Warehouse("67e426623b15a06514fee5e5", "Lager München", "München");
 
-		// save a couple of product data
-		repository.save(new ProductData("1","00-443175","Bio Orangensaft Sonne","Getraenk", 2500));
-		repository.save(new ProductData("1","00-871895","Bio Apfelsaft Gold","Getraenk", 3420));
-		repository.save(new ProductData("1","01-926885","Ariel Waschmittel Color","Waschmittel", 478));
-		repository.save(new ProductData("1","02-234811","Mampfi Katzenfutter Rind","Tierfutter", 1324));
-		repository.save(new ProductData("2","03-893173","Saugstauberbeutel Ingres","Reinigung", 7390));
-		System.out.println();
+		warehouseRepository.save(warehouse1);
+		warehouseRepository.save(warehouse2);
 
-		// fetch all products
-		System.out.println("ProductData found with findAll():");
-		System.out.println("-------------------------------");
-		for (ProductData productdata : repository.findAll()) {
-			System.out.println(productdata);
-		}
-		System.out.println();
-
-		// Fetch single product
-		System.out.println("Record(s) found with ProductID(\"00-871895\"):");
-		System.out.println("--------------------------------");
-		System.out.println(repository.findByProductID("00-871895"));
-		System.out.println();
-
-		// Fetch all products of Warehouse 1
-		System.out.println("Record(s) found with findByWarehouseID(\"1\"):");
-		System.out.println("--------------------------------");
-		for (ProductData productdata : repository.findByWarehouseID("1")) {
-			System.out.println(productdata);
-		}
-		System.out.println();
-
-		// Fetch all products of Warehouse 2
-		System.out.println("Record(s) found with findByWarehouseID(\"2\"):");
-		System.out.println("--------------------------------");
-		for (ProductData productdata : repository.findByWarehouseID("2")) {
-			System.out.println(productdata);
-		}
-
+		productRepository.save(new ProductData("67e426623b15a06514fee5e5", "00-443175", "Bio Orangensaft Sonne", "Getränk", 2500));
+		productRepository.save(new ProductData("67e426623b15a06514fee5e5", "00-871895", "Bio Apfelsaft Gold", "Getränk", 3420));
+		productRepository.save(new ProductData("67e426623b15a06514fee5e6", "03-893173", "Staubsaugerbeutel", "Reinigung", 7390));
 	}
-
 }
